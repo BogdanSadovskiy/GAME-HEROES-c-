@@ -18,7 +18,10 @@ namespace myGame
         public int defaultDodgeChance { get; set; }
         public int defaultMissChance { get; set; }
 
+
+        public int Gold { get; set;}    
         public int Health { get; set; }
+        public int currenthealth { get; set; }
         public int HealthRegeneration { get; set; }
         public int PhysicalDamage { get; set; }
         public int MagicalDamage { get; set; }
@@ -38,9 +41,13 @@ namespace myGame
 
         public void HealthCheking()
         {
-            if(this.Health < 0)
+            if(this.currenthealth < 0)
             {
-                Health = 0;
+                currenthealth = 0;
+            }
+            if (currenthealth > this.Health)
+            {
+                currenthealth = Health;
             }
         }
         abstract public int phisicalAttack();
@@ -48,6 +55,11 @@ namespace myGame
         abstract public int Regeneration();
         abstract public int getAttacked(int physicalDamage_, int magicalDamage_,
         int damageDealt_);
+        public void DamageCounter(int damage)
+        {
+            this.damageDealt+= damage;
+        }
+        abstract public  void GoldEarn(Hero hero);
 
     };
 }

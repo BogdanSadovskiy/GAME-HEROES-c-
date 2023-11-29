@@ -7,6 +7,7 @@ namespace myGame
         public Octarine_Core()
         {
             this.Name = "Octarine Core";
+            this.price = 3000;
             this.health = 300;
             this.HealthRegeneration = 6;
             this.physicalDamage = 10;

@@ -7,6 +7,7 @@ namespace myGame
         public Vanguard()
         {
             this.Name = "Vanguard";
+            this.price = 2000;
             this.health = 250;
             this.HealthRegeneration = 10;
             this.physicalDamage = 10;

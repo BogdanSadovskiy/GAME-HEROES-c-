@@ -7,6 +7,7 @@ namespace myGame
         public Eternal_Shroud()
         {
             this.Name = "Eternal Shroud";
+            this.price = 1900;
             this.health = 200;
             this.HealthRegeneration = 7;
             this.physicalDamage = 0;

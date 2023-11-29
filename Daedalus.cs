@@ -7,6 +7,7 @@ namespace myGame
         public Daedalus()
         {
             this.Name = "Daedalus";
+            this.price = 2400;
             this.health = 0;
             this.HealthRegeneration = 0;
             this.physicalDamage = 70;

@@ -23,6 +23,7 @@ class Juggernaut : Hero
         this.defaultMissChance = 0;
 
         this.Health = this.defaultHealth;
+        this.currenthealth = Health;
         this.HealthRegeneration = this.defaultHealthRegeneration;
         this.PhysicalDamage = this.defaultPhysicleDamage;
         this.MagicalDamage = this.defaultMagicalDamage;
@@ -34,6 +35,7 @@ class Juggernaut : Hero
         this.numberOFAttack = 0;
         this.damageDealt = 0;
         this.damageRecived = 0;
+        this.Gold = 1000;
     }
 
     public override void addArtefact(List<Artefact> artefacts_)
@@ -108,7 +110,7 @@ class Juggernaut : Hero
         }
         
         this.damageRecived += (int)(magDmg + dmg);
-        this.Health -= (int)(magDmg + dmg);
+        this.currenthealth -= (int)(magDmg + dmg);
         this.HealthCheking();
         return (int)(magDmg + dmg);
 
@@ -145,14 +147,17 @@ class Juggernaut : Hero
 
     public override int Regeneration()
     {
-        int healthLine = this.Health;
-        this.Health += this.HealthRegeneration;
-        if(Health > healthLine)
-        {
-            Health = healthLine;
-        }
+        this.currenthealth += this.HealthRegeneration;
+        HealthCheking();
         return this.HealthRegeneration;
     }
 
-
+    public override void GoldEarn(Hero hero)
+    {
+        if(hero.Health == 0)
+        {
+            this.Gold += 2000;
+        }
+        this.Gold += 5;
+    }
 }

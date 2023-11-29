@@ -76,8 +76,28 @@ namespace myGame
 
             }
 
-            Console.WriteLine("--------------------------------------------------\n");
+            Console.WriteLine("--------------------------------------------------");
         }
 
+        public void artefactListViewer(List<Artefact> artefactList)
+        {
+            int i = 1;
+            foreach(Artefact item in artefactList)
+            {
+                Console.WriteLine("==================== " + i+ " =======================");
+                ArtefactCard(item);
+                Console.WriteLine("==============================================\n");
+            }
+        }
+        public bool isGoldEnough(Artefact item, Hero hero) {
+        if(item.price> hero.Gold)
+            {
+                Console.WriteLine("Not enough gold");
+                return false;
+            }
+            Console.WriteLine("You have bought " + item.Name);
+            return true;
+        }
+        
     }
 }

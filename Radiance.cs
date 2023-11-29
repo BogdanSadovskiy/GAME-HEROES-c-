@@ -7,6 +7,7 @@ namespace myGame
         public Radiance()
         {
             this.Name = "Radiance";
+            this.price = 4000;
             this.health = 0;
             this.HealthRegeneration = 0;
             this.physicalDamage = 60;

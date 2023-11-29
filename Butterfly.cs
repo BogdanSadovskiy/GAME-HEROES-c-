@@ -7,6 +7,7 @@ namespace myGame
         public Butterfly()
         {
             this.Name = "Butterfly";
+            this.price = 3000;
             this.health = 0;
             this.HealthRegeneration = 0;
             this.physicalDamage = 70;
