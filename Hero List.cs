@@ -7,7 +7,7 @@ namespace myGame
         {
             Console.WriteLine("----------------------------------------------");
             Console.WriteLine(hero.Name);
-            Console.WriteLine("Health - " + hero.Health);
+            Console.WriteLine("Health - " + hero.currenthealth);
             Console.WriteLine("Main damage - " + hero.damageType);
             Console.WriteLine("Physical dmg - " + hero.PhysicalDamage +
                 " Magical dmg - " + hero.defaultMagicalDamage);
@@ -87,6 +87,7 @@ namespace myGame
                 Console.WriteLine("==================== " + i+ " =======================");
                 ArtefactCard(item);
                 Console.WriteLine("==============================================\n");
+                i++;
             }
         }
         public bool isGoldEnough(Artefact item, Hero hero) {

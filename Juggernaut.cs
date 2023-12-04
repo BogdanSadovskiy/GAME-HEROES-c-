@@ -46,6 +46,7 @@ class Juggernaut : Hero
             {
                 this.artefacts.Add(a);
                 this.Health += a.health;
+                this.currenthealth+= a.health;
                 this.HealthRegeneration += a.HealthRegeneration;
                 this.PhysicalDamage += a.physicalDamage;
                 this.MagicalDamage +=a.magicalDamage;
@@ -93,7 +94,7 @@ class Juggernaut : Hero
                     (0.9 + 0.048 * this.PhysicalResistance);
                 dmg *= (1 - kofOfPhysicleResistanse);
                 Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine((int)dmg);
+                    Console.WriteLine("Physical damage - " + (int)dmg);
                 Console.ResetColor();
             }
             
@@ -127,6 +128,7 @@ class Juggernaut : Hero
         double dmg = this.PhysicalDamage;
         if (this.numberOFAttack == 2)     ///HEro ability double damage every 3 hit
         {
+            Console.WriteLine("Ability used");
             dmg *= 1.75;
             this.numberOFAttack = 0;
         }

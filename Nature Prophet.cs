@@ -23,6 +23,7 @@ namespace myGame
             this.defaultMissChance = 0;
 
             this.Health = this.defaultHealth;
+            this.currenthealth = Health;
             this.HealthRegeneration = this.defaultHealthRegeneration;
             this.PhysicalDamage = this.defaultPhysicleDamage;
             this.MagicalDamage = this.defaultMagicalDamage;
@@ -45,7 +46,7 @@ namespace myGame
                 {
                     this.artefacts.Add(a);
                     this.Health += a.health;
-                    this.currenthealth = this.Health;
+                    this.currenthealth += a.health;
                     this.HealthRegeneration += a.HealthRegeneration;
                     this.PhysicalDamage += a.physicalDamage;
                     this.MagicalDamage += a.magicalDamage;
@@ -94,7 +95,7 @@ namespace myGame
                         (0.9 + 0.048 * this.PhysicalResistance);
                     dmg *= (1 - kofOfPhysicleResistanse);
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine((int)dmg);
+                    Console.WriteLine("Physical damage - "+(int)dmg);
                     Console.ResetColor();
                 }
 
@@ -126,7 +127,13 @@ namespace myGame
                 return 0;
             }
             double dmg = this.PhysicalDamage;
- 
+            if (r.Next(1, 100) <= this.CriticalChance)
+            {
+                Console.Write("Critical dmg ");
+                dmg *= 1.75;
+
+            }
+
             return (int)dmg;
 
         }
@@ -138,7 +145,7 @@ namespace myGame
             if(r.Next(1,100) <= 20) 
             {
                 int magDMG = this.MagicalDamage * 2;
-                Console.WriteLine("Nature is helping me ");     
+                Console.WriteLine("The power of nature ");     
                 this.numberOFAttack = 0;
                 return magDMG;
             }
