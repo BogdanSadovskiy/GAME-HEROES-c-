@@ -160,6 +160,6 @@ class Juggernaut : Hero
         {
             this.Gold += 2000;
         }
-        this.Gold += 5;
+        this.Gold += 8;
     }
 }

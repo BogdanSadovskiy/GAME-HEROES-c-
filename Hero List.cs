@@ -8,17 +8,18 @@ namespace myGame
             Console.WriteLine("----------------------------------------------");
             Console.WriteLine(hero.Name);
             Console.WriteLine("Health - " + hero.currenthealth);
-            Console.WriteLine("Main damage - " + hero.damageType);
             Console.WriteLine("Physical dmg - " + hero.PhysicalDamage +
-                " Magical dmg - " + hero.defaultMagicalDamage);
-            Console.WriteLine("Physical/Magical resistance - " + hero.defaultPhysicalResistance +
+                " Magical dmg - " + hero.MagicalDamage);
+            Console.WriteLine("Physical/Magical resistance - " + hero.PhysicalResistance +
                 "/" + hero.MagicalResistance);
+            Console.WriteLine(hero.Gold);
             Console.WriteLine("----------------------------------------------");
         }
         public  void HeroCard(Hero hero)
         {
             Console.WriteLine("==============================================");
             mainStats(hero);
+            Console.WriteLine("Main damage - " + hero.damageType);
             Console.WriteLine(hero.HeroDescr);
             Console.WriteLine("==============================================\n");
         }

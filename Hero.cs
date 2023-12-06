@@ -60,6 +60,18 @@ namespace myGame
             this.damageDealt+= damage;
         }
         abstract public  void GoldEarn(Hero hero);
-
+        public bool isHeroAlive()
+        {
+            if (this.currenthealth <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public void other(Hero hero)
+        {
+            this.Regeneration();
+            this.GoldEarn(hero);
+        }
     };
 }

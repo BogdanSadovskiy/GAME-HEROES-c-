@@ -12,11 +12,11 @@ namespace myGame
                 "When it is Dark Night - health regeneration +10";
 
             this.defaultHealth = 1350;
-            this.defaultHealthRegeneration = 10;
+            this.defaultHealthRegeneration = 17;
             this.damageType = DamageTYPE.Magical;
             this.defaultPhysicleDamage = 60;
-            this.defaultMagicalDamage = 100;
-            this.defaultCriticalChance = 20;
+            this.defaultMagicalDamage = 140;
+            this.defaultCriticalChance = 0;
             this.defaultDodgeChance = 25;
             this.defaultMagicalResistance = 30;
             this.defaultPhysicalResistance = 5;
@@ -167,7 +167,7 @@ namespace myGame
             {
                 this.Gold += 2000;
             }
-            this.Gold += 5;
+            this.Gold += 8;
         }
     }
 }
