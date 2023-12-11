@@ -35,6 +35,11 @@ namespace myGame
         public int damageRecived { get; set; }
         public int healed { get; set; }
 
+
+        public int isArtefactsFull()           
+        {
+            return artefacts.Count();
+        }
         abstract public void addArtefact(List<Artefact> artefacts);
         abstract public void weatherFactors(Weather weather);
 

@@ -19,16 +19,16 @@ class program
         Radiance radiance = new Radiance();
         Vanguard vanguard = new Vanguard();
         Butterfly butterfly = new Butterfly();
-        List<Artefact> artefact_list = new List<Artefact>();
-        artefact_list.Add(eternal_Shroud);
-        artefact_list.Add(daedalus);
-        artefact_list.Add(octarine_Core);
-        artefact_list.Add(radiance);
-        artefact_list.Add(vanguard);
-        artefact_list.Add(butterfly);
+        List<Artefact> artefacts_LVL2 = new List<Artefact>();
+        artefacts_LVL2.Add(eternal_Shroud);
+        artefacts_LVL2.Add(daedalus);
+        artefacts_LVL2.Add(octarine_Core);
+        artefacts_LVL2.Add(radiance);
+        artefacts_LVL2.Add(vanguard);
+        artefacts_LVL2.Add(butterfly);
         //artefacts
 
-
+        Store store = new Store();
         Hero_Viewer heroViewer = new Hero_Viewer();
         List<Hero> HeroesList = new List<Hero>();
         Nature_Prophet nature_Prophet = new Nature_Prophet();
@@ -66,29 +66,43 @@ class program
             /////////////////////////////////////////////////////////
             do
             {
-                Console.WriteLine("\t\tPlayer 1:\n\t\tChoose the hero: ");
+                Console.WriteLine("\n\t\tPlayer 1:\tChoose the hero: ");
                 heroViewer.HeroesCards(HeroesList);
 
-                menu_ = Console.ReadLine();
-                menu = Int16.Parse(menu_);
+                key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    break;
+                }
+                char f;
+                f = (key.KeyChar);
+                menu = Int16.Parse(f.ToString());
 
             } while (menu > HeroesList.Count());
 
             player1 = HeroesList[menu - 1];                 //Chosing first hero for player 1
-            Console.WriteLine("Player 1 has chosen " + player1.Name);
+            Console.WriteLine("\nPlayer 1 has chosen " + player1.Name);
             Thread.Sleep(2000);
             Console.Clear();
             //////////////////////////////////////////////////////////////////////////////
             do
             {
-                Console.WriteLine("\t\tPlayer 2:\n\t\tChoose the hero: ");
+                Console.WriteLine("\n\t\tPlayer 2:\tChoose the hero: ");
                 heroViewer.HeroesCards(HeroesList);
 
-                menu_ = Console.ReadLine();
-                menu = Int16.Parse(menu_);
+                key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    break;
+                }
+                char f;
+                f = (key.KeyChar);
+                menu = Int16.Parse(f.ToString());
             } while (menu > HeroesList.Count());
             player2 = HeroesList[menu - 1];                                //Chosing second hero
-            Console.WriteLine("Player 2 has chosen " + player2.Name);
+            Console.WriteLine("\nPlayer 2 has chosen " + player2.Name);
             Thread.Sleep(2000);
             Console.Clear();
             ////////////////////////////////////////////////////////////////
@@ -120,10 +134,10 @@ class program
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("\n\t" + player1.Name + " Store\n"); // buying for first player\
+                        Console.WriteLine("\n" + player1.Name + " Store\n"); // buying for first player\
                         Console.WriteLine("Gold - " + player1.Gold + "\n");
                         Console.WriteLine("Input \'ESC\' to exit");
-                        heroViewer.artefactListViewer(artefact_list);
+                        store.artefactListViewer(artefact_list);
                         key = Console.ReadKey();
                         if (key.Key == ConsoleKey.Escape)
                         {
@@ -137,6 +151,11 @@ class program
                         if (menu > artefact_list.Count())
                         {
                             Console.WriteLine("Wrong input");
+                            continue;
+                        }
+                        if(player1.isArtefactsFull()+ 1 > 6) 
+                        {                                                       //if arttefacts you bought > 6 
+                            Console.WriteLine("You cannot have more then 6 artefacts");
                             continue;
                         }
                         if (artefact_list[menu - 1].buyArtefact(player1.Gold))
@@ -156,21 +175,27 @@ class program
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("\n\t" + player2.Name + " Store\n"); // buying for second player
+                        Console.WriteLine("\n" + player2.Name + " Store\n"); // buying for second player
                         Console.WriteLine("Gold - " + player2.Gold + "\n");
                         Console.WriteLine("Input \'e\' to exit");
-                        heroViewer.artefactListViewer(artefact_list);
-                        menu_ = Console.ReadLine();
-                        if (menu_ == "e")
+                        store.artefactListViewer(artefact_list);
+                        key = Console.ReadKey();
+                        if (key.Key == ConsoleKey.Escape)
                         {
                             Console.Clear();
                             break;
-
                         }
-                        menu = Int16.Parse(menu_);
+                        char f;
+                        f = (key.KeyChar);
+                        menu = Int16.Parse(f.ToString());
                         if (menu > artefact_list.Count())
                         {
                             Console.WriteLine("Wrong input");
+                            continue;
+                        }
+                        if (player1.isArtefactsFull() + 1 > 6)
+                        {                                           //if arttefacts you bought > 6 
+                            Console.WriteLine("You cannot have more then 6 artefacts");
                             continue;
                         }
                         if (artefact_list[menu - 1].buyArtefact(player2.Gold))
