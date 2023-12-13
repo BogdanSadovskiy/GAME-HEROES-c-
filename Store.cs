@@ -64,17 +64,22 @@ namespace myGame
         public void artefactListViewer(List<Artefact> artefactList, bool status)
         {
             int i = 1;
-            if(artefactList!= null || artefactList?.Count()!=0)
+            if(artefactList!= null )
             {
-                foreach (Artefact item in artefactList)
+                if(artefactList?.Count() != 0)
                 {
-                    Console.WriteLine("==================== " + i + " =======================");
-                    ArtefactCard(item, status);
-                    Console.WriteLine("==============================================\n");
-                    i++;
+                    foreach (Artefact item in artefactList)
+                    {
+                        Console.WriteLine("==================== " + i + " =======================");
+                        ArtefactCard(item, status);
+                        Console.WriteLine("==============================================\n");
+                        i++;
+                    }
+                    return;
                 }
+               
             }
-            else { Console.WriteLine("Empty"); }
+            Console.WriteLine("Empty");
            
         }
         public bool isGoldEnough(Artefact item, Hero hero)
