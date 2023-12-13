@@ -12,11 +12,13 @@ namespace myGame
             this.HealthRegeneration = 6;
             this.physicalDamage = 10;
             this.magicalDamage = 40;
-            this.PhysicalResistance = 0;
-            this.MagicalResistance = 0;
+            this.PhysicalResistance = 6;
+            this.MagicalResistance = 5;
             this.CriticalChance = 0;
-            this.DodgeChance = 0;
+            this.DodgeChance = 10;
             this.MissChance = 0;
+            this.GoldIncrease = 0;
+            this.returnedDamage = 0;
 
         }
     }

@@ -12,7 +12,7 @@ class Juggernaut : Hero
             "When Sunny - magical resistance +15";
         
         this.defaultHealth = 1600;
-        this.defaultHealthRegeneration = 15;
+        this.defaultHealthRegeneration = 7;
         this.damageType = DamageTYPE.Physical;
         this.defaultPhysicleDamage = 160;
         this.defaultMagicalDamage = 0;
@@ -33,9 +33,11 @@ class Juggernaut : Hero
         this.DodgeChance = this.defaultDodgeChance;
         this.MissChance = this.defaultMissChance;
         this.numberOFAttack = 0;
+        this.returnedDamage = 0;
         this.damageDealt = 0;
         this.damageRecived = 0;
         this.Gold = 1000;
+        this.GoldIncrease = 0;
     }
 
 
@@ -139,6 +141,6 @@ class Juggernaut : Hero
         {
             this.Gold += 2000;
         }
-        this.Gold += 8;
+        this.Gold += 8 + GoldIncrease;
     }
 }

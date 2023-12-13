@@ -2,24 +2,23 @@
 
 namespace myGame
 {
-    internal class Radiance : Artefact
+    internal class Philosopher_s_Stone : Artefact
     {
-        public Radiance()
+        public Philosopher_s_Stone()
         {
-            this.Name = "Radiance";
-            this.price = 4000;
+            this.Name = "Philosopher\'s Stone";
+            this.price = 900;
             this.health = 0;
             this.HealthRegeneration = 0;
-            this.physicalDamage = 60;
-            this.magicalDamage = 60;
+            this.physicalDamage = -20;
+            this.magicalDamage = 10;
             this.PhysicalResistance = 0;
             this.MagicalResistance = 0;
             this.CriticalChance = 0;
-            this.DodgeChance = 12;
+            this.DodgeChance = 0;
             this.MissChance = 0;
-            this.GoldIncrease = 0;
+            this.GoldIncrease = 60;
             this.returnedDamage = 0;
-
         }
     }
 }

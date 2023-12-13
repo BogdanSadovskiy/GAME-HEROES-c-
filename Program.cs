@@ -12,35 +12,39 @@ class program
     static void Main(string[] args)
     {
 
-
-        Eternal_Shroud eternal_Shroud = new Eternal_Shroud();
-        Daedalus daedalus = new Daedalus();
-        Octarine_Core octarine_Core = new Octarine_Core();
-        Radiance radiance = new Radiance();
-        Vanguard vanguard = new Vanguard();
-        Butterfly butterfly = new Butterfly();
         List<Artefact> artefacts_LVL1= new List<Artefact>();
+        artefacts_LVL1.Add(new Broom_Handle());
+        artefacts_LVL1.Add(new Occult_Bracelet());
+        artefacts_LVL1.Add(new Philosopher_s_Stone());
         List<Artefact> artefacts_LVL2 = new List<Artefact>();
-        artefacts_LVL2.Add(eternal_Shroud);
-        artefacts_LVL2.Add(daedalus);
-        artefacts_LVL2.Add(octarine_Core);
-        artefacts_LVL2.Add(radiance);
-        artefacts_LVL2.Add(vanguard);
-        artefacts_LVL2.Add(butterfly);
+        artefacts_LVL2.Add(new Eternal_Shroud());
+        artefacts_LVL2.Add(new Daedalus());
+        artefacts_LVL2.Add(new Octarine_Core());
+        artefacts_LVL2.Add(new Radiance());
+        artefacts_LVL2.Add(new Vanguard());
+        artefacts_LVL2.Add(new Butterfly());
+        artefacts_LVL2.Add(new Blade_Mail());
+
+        artefacts_LVL1.Sort((Artefact a, Artefact b) => a.price.CompareTo(b.price));
+        artefacts_LVL2.Sort((Artefact a, Artefact b) => a.price.CompareTo(b.price)); // sorting using lambda 
         //artefacts lvl2
 
         Store store = new Store();
         Hero_Viewer heroViewer = new Hero_Viewer();
-        List<Hero> HeroesList = new List<Hero>();
+        
         Nature_Prophet nature_Prophet = new Nature_Prophet();
         Juggernaut juggernaut = new Juggernaut();
-        HeroesList.Add(juggernaut);
-        HeroesList.Add(nature_Prophet);
+        Alchemist alchemist = new Alchemist();
+
         //heroes
         Console.WriteLine("\n\n\t\tThis game is about fighting between heroes.\n\t\tHeroes can grow by earnig gold, bying items, etc\n");
 
         while (true) /// GAME PROCESS
         {
+            List<Hero> HeroesList = new List<Hero>();
+            HeroesList.Add(juggernaut);
+            HeroesList.Add(nature_Prophet);
+            HeroesList.Add(alchemist);
             Console.WriteLine("\t\tPress ENTER to start game");
             Console.WriteLine("\t\tPress any key to exit");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -163,7 +167,7 @@ class program
                 Console.WriteLine(" PLAYER 1 - " + player1.Name + " attacking:");
                 int dmg = damageRecievePlayer2(player1.phisicalAttack(), player1.magicalAttack(), player1.damageDealt); // damaging Hero 2
                 player1.DamageCounter(dmg); //counting dealt damage
-                player1.other(player2);
+                player1.other(player2, dmg);
                 heroViewer.mainStats(player2);//Stats in the moment
                                               // ----------------------------- Is player 1 winner? ----------------------------//
                 if (!player2.isHeroAlive())
@@ -179,7 +183,7 @@ class program
                 Console.WriteLine(" PLAYER 2 - " + player2.Name + " attacking:");
                 dmg = damageRecievePlayer1(player2.phisicalAttack(), player2.magicalAttack(), player2.damageDealt); // damaging Hero 1
                 player2.DamageCounter(dmg); //counting dealt damage
-                player2.other(player1);
+                player2.other(player1, dmg);
                 heroViewer.mainStats(player2);
                 //------------------------------------------------------------------------------------------------------------------------------------------------
                 // ----------------------------- Is player 2 winner? ----------------------------//

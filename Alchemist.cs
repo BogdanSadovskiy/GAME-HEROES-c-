@@ -2,24 +2,26 @@
 
 namespace myGame
 {
-    internal class Nature_Prophet : Hero
+
+    internal class Alchemist : Hero
     {
-        public Nature_Prophet()
+        public Alchemist()
         {
 
-            this.Name = "Nature Prophet";
-            this.HeroDescr = "Has 20% chance to deal double magic damage\n" +
-                "When it is Dark Night - health regeneration +10";
+            this.Name = "Alchemist";
+            this.HeroDescr = "Starting gold - 1200\nHas increased gold income by 18\n" +
+                "When Sunny - gold income + 10\n" + "When Cloudy - gold income + 5\n"
+                + "When Dark night - gold income +19 / physical damage -30";
 
-            this.defaultHealth = 1350;
-            this.defaultHealthRegeneration = 17;
-            this.damageType = DamageTYPE.Magical;
-            this.defaultPhysicleDamage = 60;
-            this.defaultMagicalDamage = 140;
+            this.defaultHealth = 1500;
+            this.defaultHealthRegeneration = 7;
+            this.damageType = DamageTYPE.Physical;
+            this.defaultPhysicleDamage = 150;
+            this.defaultMagicalDamage = 0;
             this.defaultCriticalChance = 0;
-            this.defaultDodgeChance = 25;
-            this.defaultMagicalResistance = 30;
-            this.defaultPhysicalResistance = 5;
+            this.defaultDodgeChance = 5;
+            this.defaultMagicalResistance = 20;
+            this.defaultPhysicalResistance = 15;
             this.defaultMissChance = 0;
 
             this.Health = this.defaultHealth;
@@ -36,25 +38,31 @@ namespace myGame
             this.returnedDamage = 0;
             this.damageDealt = 0;
             this.damageRecived = 0;
-            this.Gold = 1000;
-            this.GoldIncrease = 0;
+            this.Gold = 1200;
+            this.GoldIncrease = 18;
         }
 
-      
+
 
         public override void weatherFactors(Weather weather)
         {
-            this.MagicalResistance += weather.magicResistance;
+
+            if (weather.Name == "Sunny")
+            {
+                this.GoldIncrease += 10;
+            }
             if (weather.Name == "Dark night")
             {
-                this.HealthRegeneration += 10;
+                this.GoldIncrease += 19;
+                this.PhysicalDamage -= 30;
             }
-            else
+            if (weather.Name == "Cloudy")
             {
-                this.HealthRegeneration += weather.helthRegeneration;
-                
+                this.GoldIncrease += 5;
             }
-            this.MissChance += weather.missChance;
+            this.HealthRegeneration += weather.helthRegeneration;
+            this.MagicalResistance += weather.magicResistance;
+            this.MissChance+= weather.missChance;
 
         }
 
@@ -76,7 +84,7 @@ namespace myGame
                         (0.9 + 0.048 * this.PhysicalResistance);
                     dmg *= (1 - kofOfPhysicleResistanse);
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Physical damage - "+(int)dmg);
+                    Console.WriteLine("Physical damage - " + (int)dmg);
                     Console.ResetColor();
                 }
 
@@ -108,35 +116,23 @@ namespace myGame
                 return 0;
             }
             double dmg = this.PhysicalDamage;
+
             if (r.Next(1, 100) <= this.CriticalChance)
             {
                 Console.Write("Critical dmg ");
                 dmg *= 1.75;
-
             }
-
             return (int)dmg;
 
         }
 
         public override int magicalAttack()
         {
-            Random r = new Random();
-
-            if(r.Next(1,100) <= 20) 
-            {
-                int magDMG = this.MagicalDamage * 2;
-                Console.WriteLine("The power of nature ");     
-                this.numberOFAttack = 0;
-                return magDMG;
-            }
-         
             return this.MagicalDamage;
         }
 
         public override int Regeneration()
         {
-           
             this.currenthealth += this.HealthRegeneration;
             HealthCheking();
             return this.HealthRegeneration;
@@ -152,4 +148,3 @@ namespace myGame
         }
     }
 }
-

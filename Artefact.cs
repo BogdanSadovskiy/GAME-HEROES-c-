@@ -17,6 +17,8 @@ namespace myGame
         public int CriticalChance { get; set; }
         public int DodgeChance { get; set; }
         public int MissChance { get; set; }
+        public int GoldIncrease { get; set; }
+        public int returnedDamage { get; set; }
 
         public bool buyArtefact (int gold)
         {

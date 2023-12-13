@@ -3,7 +3,7 @@ namespace myGame
 {
     abstract class Hero
     {
-        public List<Artefact> artefacts;
+        public List<Artefact> artefacts = new List<Artefact>();
         public int numberOFAttack;
         public string Name { get; set; }
         public string HeroDescr { get; set; }
@@ -19,7 +19,8 @@ namespace myGame
         public int defaultMissChance { get; set; }
 
 
-        public int Gold { get; set;}    
+        public int Gold { get; set;}   
+        public int GoldIncrease { get; set;}
         public int Health { get; set; }
         public int currenthealth { get; set; }
         public int HealthRegeneration { get; set; }
@@ -30,7 +31,7 @@ namespace myGame
         public int CriticalChance { get; set; }
         public int DodgeChance { get; set; }
         public int MissChance { get; set; }
-
+        public int returnedDamage { get; set; }
         public int damageDealt { get; set; }
         public int damageRecived { get; set; }
         public int healed { get; set; }
@@ -53,10 +54,13 @@ namespace myGame
             this.CriticalChance -= this.artefacts[index].CriticalChance;
             this.DodgeChance -= this.artefacts[index].DodgeChance;
             this.MissChance -= this.artefacts[index].MissChance;
+            this.GoldIncrease-= this.artefacts[index].GoldIncrease;
+            this.returnedDamage -= this.artefacts[index].returnedDamage;
             this.artefacts.RemoveAt(index);
         }
         public void addArtefact(Artefact a)
         {
+
             if (a != null)
             {
                 this.artefacts.Add(a);
@@ -70,11 +74,22 @@ namespace myGame
                 this.CriticalChance += a.CriticalChance;
                 this.DodgeChance += a.DodgeChance;
                 this.MissChance += a.MissChance;
+                this.GoldIncrease += a.GoldIncrease;
+                this.returnedDamage+= a.returnedDamage;
 
             }
         }
         abstract public void weatherFactors(Weather weather);
-
+        public int returnedDMG (int DMG)
+        {
+            if(this.returnedDamage == 0) { return 0; }
+            int d = (int)(DMG * (0.01 * this.returnedDamage));
+            Console.Write(this.Name +" returned damage - ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(d);
+            Console.ResetColor();
+            return d ;
+        } 
 
         public void HealthCheking()
         {
@@ -105,10 +120,12 @@ namespace myGame
             }
             return true;
         }
-        public void other(Hero hero)
+        public void other(Hero hero, int damage)
         {
+            hero.DamageCounter( hero.returnedDMG(damage)); //counting returned damage
             this.Regeneration();
             this.GoldEarn(hero);
+
         }
     };
 }

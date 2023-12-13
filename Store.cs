@@ -57,7 +57,14 @@ namespace myGame
                 Console.WriteLine("Dodge chance " + actefact.DodgeChance);
 
             }
-
+            if (actefact.GoldIncrease != 0)
+            {
+                Console.WriteLine("Gold per round " + actefact.GoldIncrease);
+            }
+            if (actefact.returnedDamage != 0)
+            {
+                Console.WriteLine("Damage return - " + actefact.returnedDamage);
+            }
             Console.WriteLine("--------------------------------------------------");
         }
 
@@ -93,9 +100,13 @@ namespace myGame
         }
         public bool isHeroCanAddItem(Hero hero)
         {
-            if(hero.artefacts.Count <= 6) { return true; }
-            Console.WriteLine("Not enough space for artifacts");
-            return false;
+            if(hero.artefacts!= null)
+            {
+                if (hero.artefacts.Count() <= 6) { return true; }
+                Console.WriteLine("Not enough space for artifacts");
+                return false;
+            }
+            return true;
         }
      
 
@@ -105,7 +116,7 @@ namespace myGame
             {
                 int menu;
                 Console.Clear();
-                Console.WriteLine("\n" + player + " " + hero.Name + " Store\n");
+                Console.WriteLine("\n " + player + " " + hero.Name + " Store\n");
                 Console.WriteLine("Gold - " + hero.Gold + "\n");
                 Console.WriteLine("\n" + artefacts_LVL + ":");
                 artefactListViewer(item, ForBuy);
@@ -143,7 +154,7 @@ namespace myGame
             {
                 int menu;
                 Console.Clear();
-                Console.WriteLine("\n" + player + " " + hero.Name + " Store\n");
+                Console.WriteLine("\n " + player + " " + hero.Name + " Store\n");
                 Console.WriteLine("Gold - " + hero.Gold + "\n");
                 Console.WriteLine("Choose artefact you want to sell");
                 artefactListViewer(hero.artefacts, ForSell);
