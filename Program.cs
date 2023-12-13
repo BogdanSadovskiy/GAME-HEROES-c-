@@ -174,6 +174,7 @@ class program
                 {
                     Console.Clear();
                     Console.WriteLine("\n\n\n\n\t\t" + player1.Name + "\n\t\tWINNER");
+                    round = 1;
                     break;
                 }
                 Thread.Sleep(2000);
@@ -191,6 +192,7 @@ class program
                 {
                     Console.Clear();
                     Console.WriteLine("\n\n\n\n\t\t" + player2.Name + "\n\t\tWINNER");
+                    round = 1;
                     break;
                 }
                 Thread.Sleep(2000);

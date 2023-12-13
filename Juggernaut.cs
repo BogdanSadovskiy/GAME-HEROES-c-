@@ -119,12 +119,14 @@ class Juggernaut : Hero
             dmg *= 1.75;
         }
         this.numberOFAttack++;
+        this.damageDealt += (int)dmg;
         return (int)dmg;
 
     }
 
     public override int magicalAttack()
     {
+        this.damageDealt += this.MagicalDamage;
         return this.MagicalDamage;
     }
 
@@ -132,6 +134,7 @@ class Juggernaut : Hero
     {
         this.currenthealth += this.HealthRegeneration;
         HealthCheking();
+        this.healed += this.HealthRegeneration;
         return this.HealthRegeneration;
     }
 

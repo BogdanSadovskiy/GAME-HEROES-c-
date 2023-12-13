@@ -122,12 +122,14 @@ namespace myGame
                 Console.Write("Critical dmg ");
                 dmg *= 1.75;
             }
+            this.damageDealt += (int)dmg;
             return (int)dmg;
 
         }
 
         public override int magicalAttack()
         {
+            this.damageDealt += this.MagicalDamage;
             return this.MagicalDamage;
         }
 
@@ -135,6 +137,7 @@ namespace myGame
         {
             this.currenthealth += this.HealthRegeneration;
             HealthCheking();
+            this.healed += this.HealthRegeneration;
             return this.HealthRegeneration;
         }
 

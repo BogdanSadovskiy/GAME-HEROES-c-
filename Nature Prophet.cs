@@ -114,7 +114,7 @@ namespace myGame
                 dmg *= 1.75;
 
             }
-
+            this.damageDealt += (int)dmg;
             return (int)dmg;
 
         }
@@ -128,9 +128,10 @@ namespace myGame
                 int magDMG = this.MagicalDamage * 2;
                 Console.WriteLine("The power of nature ");     
                 this.numberOFAttack = 0;
+                this.damageDealt += magDMG;
                 return magDMG;
             }
-         
+            this.damageDealt += this.MagicalDamage;
             return this.MagicalDamage;
         }
 
@@ -139,6 +140,7 @@ namespace myGame
            
             this.currenthealth += this.HealthRegeneration;
             HealthCheking();
+            this.healed += this.HealthRegeneration;
             return this.HealthRegeneration;
         }
 
