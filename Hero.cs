@@ -40,7 +40,39 @@ namespace myGame
         {
             return artefacts.Count();
         }
-        abstract public void addArtefact(List<Artefact> artefacts);
+
+        public void removeArtefact(int index)
+        {
+            this.Health -= this.artefacts[index].health;
+            this.currenthealth -= this.artefacts[index].health;
+            this.HealthRegeneration -= this.artefacts[index].HealthRegeneration;
+            this.PhysicalDamage -= this.artefacts[index].physicalDamage;
+            this.MagicalDamage -= this.artefacts[index].magicalDamage;
+            this.PhysicalResistance -= this.artefacts[index].PhysicalResistance;
+            this.MagicalResistance -= this.artefacts[index].MagicalResistance;
+            this.CriticalChance -= this.artefacts[index].CriticalChance;
+            this.DodgeChance -= this.artefacts[index].DodgeChance;
+            this.MissChance -= this.artefacts[index].MissChance;
+            this.artefacts.RemoveAt(index);
+        }
+        public void addArtefact(Artefact a)
+        {
+            if (a != null)
+            {
+                this.artefacts.Add(a);
+                this.Health += a.health;
+                this.currenthealth += a.health;
+                this.HealthRegeneration += a.HealthRegeneration;
+                this.PhysicalDamage += a.physicalDamage;
+                this.MagicalDamage += a.magicalDamage;
+                this.PhysicalResistance += a.PhysicalResistance;
+                this.MagicalResistance += a.MagicalResistance;
+                this.CriticalChance += a.CriticalChance;
+                this.DodgeChance += a.DodgeChance;
+                this.MissChance += a.MissChance;
+
+            }
+        }
         abstract public void weatherFactors(Weather weather);
 
 

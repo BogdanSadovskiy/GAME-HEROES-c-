@@ -38,28 +38,7 @@ namespace myGame
             this.Gold = 1000;
         }
 
-        public override void addArtefact(List<Artefact> artefacts_)
-        {
-            if (artefacts != null)
-            {
-                foreach (Artefact a in artefacts_)
-                {
-                    this.artefacts.Add(a);
-                    this.Health += a.health;
-                    this.currenthealth += a.health;
-                    this.HealthRegeneration += a.HealthRegeneration;
-                    this.PhysicalDamage += a.physicalDamage;
-                    this.MagicalDamage += a.magicalDamage;
-                    this.PhysicalResistance += a.PhysicalResistance;
-                    this.MagicalResistance += a.MagicalResistance;
-                    this.CriticalChance += a.CriticalChance;
-                    this.DodgeChance += a.DodgeChance;
-                    this.MissChance += a.MissChance;
-
-                }
-            }
-
-        }
+      
 
         public override void weatherFactors(Weather weather)
         {

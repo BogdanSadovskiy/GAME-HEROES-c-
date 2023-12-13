@@ -15,7 +15,7 @@ namespace myGame
             this.PhysicalResistance = 0;
             this.MagicalResistance = 20;
             this.CriticalChance = 30;
-            this.DodgeChance = 0;
+            this.DodgeChance = 20;
             this.MissChance = 0;
         }
     }
