@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace myGame;
 
 class Juggernaut : Hero
@@ -56,94 +58,24 @@ class Juggernaut : Hero
         this.MissChance += weather.missChance;
 
     }
-
-    override public int getAttacked(int physicalDamage_, int magicalDamage_,
-        int damageDealt_)
+    public override int heroFeaturePhysicalAttack()
     {
-        double dmg = physicalDamage_;
-        double magDmg = magicalDamage_;
-        if (physicalDamage_ != 0)
+        double dmg = (double)commonPhisicalAttack();
+        if (dmg > 0 && this.numberOFAttack == 2)
         {
-            Random r = new Random();
-            if (r.Next(1, 100) <= this.DodgeChance)
-            {
-                Console.WriteLine("Dodged");
-            }
-            else
-            { 
-                double kofOfPhysicleResistanse = (0.052 * this.PhysicalResistance) /
-                    (0.9 + 0.048 * this.PhysicalResistance);
-                dmg *= (1 - kofOfPhysicleResistanse);
-                Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("Physical damage - " + (int)dmg);
-                Console.ResetColor();
-            }
-            
+            Console.WriteLine("Ability used 1.75% dmg");
+            numberOFAttack = 0;
+            this.damageDealt -= (int)dmg;
+            damageDealt += (int)(dmg * 1.75);
+            return (int)(dmg * 1.75); /// hero ability to get increased damage
         }
-        double kofOfMagResistanse = (0.052 * this.MagicalResistance) /
-                    (0.9 + 0.048 * this.MagicalResistance);
-        magDmg *= (1 - kofOfMagResistanse);
-        if (magDmg != 0)
-        {
-            Console.Write("Magical damage ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine((int)magDmg);
-            Console.ResetColor();
-        }
-        
-        this.damageRecived += (int)(magDmg + dmg);
-        this.currenthealth -= (int)(magDmg + dmg);
-        this.HealthCheking();
-        return (int)(magDmg + dmg);
-
-    }
-
-    public override int phisicalAttack()
-    {
-        Random r = new Random();
-        if (r.Next(1, 100) <= this.MissChance)
-        {
-            Console.Write("Miss");
-            return 0;
-        }
-        double dmg = this.PhysicalDamage;
-        if (this.numberOFAttack == 2)     ///HEro ability double damage every 3 hit
-        {
-            Console.WriteLine("Ability used");
-            dmg *= 1.75;
-            this.numberOFAttack = 0;
-        }
-        if(r.Next(1,100)<= this.CriticalChance)
-        {
-            Console.Write("Critical dmg ");
-            dmg *= 1.75;
-        }
-        this.numberOFAttack++;
-        this.damageDealt += (int)dmg;
         return (int)dmg;
-
     }
 
-    public override int magicalAttack()
+    public override int heroFeatureMagicalAttack()
     {
-        this.damageDealt += this.MagicalDamage;
-        return this.MagicalDamage;
+        return commonMagicalAttack();
     }
 
-    public override int Regeneration()
-    {
-        this.currenthealth += this.HealthRegeneration;
-        HealthCheking();
-        this.healed += this.HealthRegeneration;
-        return this.HealthRegeneration;
-    }
 
-    public override void GoldEarn(Hero hero)
-    {
-        if(hero.Health == 0)
-        {
-            this.Gold += 2000;
-        }
-        this.Gold += 8 + GoldIncrease;
-    }
 }

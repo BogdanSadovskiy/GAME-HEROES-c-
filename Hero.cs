@@ -3,6 +3,7 @@ namespace myGame
 {
     abstract class Hero
     {
+        public Random random = new Random();
         public List<Artefact> artefacts = new List<Artefact>();
         public int numberOFAttack;
         public string Name { get; set; }
@@ -19,8 +20,8 @@ namespace myGame
         public int defaultMissChance { get; set; }
 
 
-        public int Gold { get; set;}   
-        public int GoldIncrease { get; set;}
+        public int Gold { get; set; }
+        public int GoldIncrease { get; set; }
         public int Health { get; set; }
         public int currenthealth { get; set; }
         public int HealthRegeneration { get; set; }
@@ -37,7 +38,7 @@ namespace myGame
         public int healed { get; set; }
 
 
-        public int isArtefactsFull()           
+        public int isArtefactsFull()
         {
             return artefacts.Count();
         }
@@ -54,7 +55,7 @@ namespace myGame
             this.CriticalChance -= this.artefacts[index].CriticalChance;
             this.DodgeChance -= this.artefacts[index].DodgeChance;
             this.MissChance -= this.artefacts[index].MissChance;
-            this.GoldIncrease-= this.artefacts[index].GoldIncrease;
+            this.GoldIncrease -= this.artefacts[index].GoldIncrease;
             this.returnedDamage -= this.artefacts[index].returnedDamage;
             this.artefacts.RemoveAt(index);
         }
@@ -75,25 +76,25 @@ namespace myGame
                 this.DodgeChance += a.DodgeChance;
                 this.MissChance += a.MissChance;
                 this.GoldIncrease += a.GoldIncrease;
-                this.returnedDamage+= a.returnedDamage;
+                this.returnedDamage += a.returnedDamage;
 
             }
         }
         abstract public void weatherFactors(Weather weather);
-        public int returnedDMG (int DMG)
+        public int returnedDMG(int DMG)
         {
-            if(this.returnedDamage == 0) { return 0; }
+            if (this.returnedDamage == 0) { return 0; }
             int d = (int)(DMG * (0.01 * this.returnedDamage));
-            Console.Write(this.Name +" returned damage - ");
+            Console.Write(this.Name + " returned damage - ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(d);
             Console.ResetColor();
-            return d ;
-        } 
+            return d;
+        }
 
         public void HealthCheking()
         {
-            if(this.currenthealth < 0)
+            if (this.currenthealth < 0)
             {
                 currenthealth = 0;
             }
@@ -102,16 +103,102 @@ namespace myGame
                 currenthealth = Health;
             }
         }
-        abstract public int phisicalAttack();
-        abstract public int magicalAttack();
-        abstract public int Regeneration();
-        abstract public int getAttacked(int physicalDamage_, int magicalDamage_,
-        int damageDealt_);
+        abstract public int heroFeatureMagicalAttack();
+        abstract public int heroFeaturePhysicalAttack();
+        public int commonPhisicalAttack()
+        {
+
+            if (random.Next(1, 100) <= this.MissChance)
+            {
+                Console.Write("Miss");
+                return 0;
+            }
+            double dmg = this.PhysicalDamage;
+            if (random.Next(1, 100) <= this.CriticalChance)
+            {
+                Console.Write("Critical dmg ");
+                double critical = this.CriticalChance/ 100;
+                dmg *=  (critical + 1);
+
+            }
+            this.damageDealt += (int)dmg;
+            return (int)dmg;
+        }
+        public int phisicalAttack()
+        {
+            return heroFeaturePhysicalAttack();
+        }
+        public int commonMagicalAttack()
+        {
+            this.damageDealt += this.MagicalDamage;
+            return this.MagicalDamage;
+        }
+        public int magicalAttack()
+        {
+           return heroFeatureMagicalAttack();
+        }
+        public int Regeneration()
+        {
+            this.currenthealth += this.HealthRegeneration;
+            HealthCheking();
+            this.healed += this.HealthRegeneration;
+            return this.HealthRegeneration;
+        }
+        private int getAttakedPhysicalDamage(int physicalDamage_)
+        {
+            if (physicalDamage_ == 0) return 0;
+            double dmg = (double)physicalDamage_;
+            if (random.Next(1, 100) <= this.DodgeChance)
+            {
+                Console.WriteLine("Dodged");
+            }
+            else
+            {
+                double kofOfPhysicleResistanse = (0.052 * this.PhysicalResistance) /
+                    (0.9 + 0.048 * this.PhysicalResistance);
+                dmg *= (1 - kofOfPhysicleResistanse);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Physical damage - " + (int)dmg);
+                Console.ResetColor();
+            }
+            return (int)dmg;
+        }
+
+        private int getAttackeMagicalDamage(int magicalDamage_)
+        {
+            if (magicalDamage_ == 0) return 0;
+            double dmg = (double)magicalDamage_;
+            double kofOfMagResistanse = (0.052 * this.MagicalResistance) /
+                       (0.9 + 0.048 * this.MagicalResistance);
+            dmg *= (1 - kofOfMagResistanse);
+            Console.Write("Magical damage ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine((int)dmg);
+            Console.ResetColor();
+            return (int)dmg;
+        }
+
+        public int getAttacked(int physicalDamage_, int magicalDamage_)
+        {
+            int damageRecivedPerThisAttack = getAttakedPhysicalDamage(physicalDamage_) + getAttackeMagicalDamage(physicalDamage_);
+            this.currenthealth-=damageRecivedPerThisAttack;
+            HealthCheking();
+            return damageRecivedPerThisAttack;
+        }
+
         public void DamageCounter(int damage)
         {
-            this.damageDealt+= damage;
+            this.damageDealt += damage;
         }
-        abstract public  void GoldEarn(Hero hero);
+
+        public void GoldEarn(Hero enemyHero)
+        {
+            if (enemyHero.Health == 0)
+            {
+                this.Gold += 2000;
+            }
+            this.Gold += 8 + GoldIncrease;
+        }
         public bool isHeroAlive()
         {
             if (this.currenthealth <= 0)
@@ -122,7 +209,7 @@ namespace myGame
         }
         public void other(Hero hero, int damage)
         {
-            hero.DamageCounter( hero.returnedDMG(damage)); //counting returned damage
+            hero.DamageCounter(hero.returnedDMG(damage)); //counting returned damage
             this.Regeneration();
             this.GoldEarn(hero);
 

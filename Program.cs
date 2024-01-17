@@ -160,12 +160,12 @@ class program
 
 
 
-                Func<int, int, int, int> damageRecievePlayer2 = player2.getAttacked;
-                Func<int, int, int, int> damageRecievePlayer1 = player1.getAttacked;
+                Func<int, int, int> damageRecievePlayer2 = player2.getAttacked;
+                Func<int, int, int> damageRecievePlayer1 = player1.getAttacked;
                 //---------------- Player 1 attack--------------------------------------------------------------------------------------//
                 heroViewer.mainStats(player1); //Stats in the moment
                 Console.WriteLine(" PLAYER 1 - " + player1.Name + " attacking:");
-                int dmg = damageRecievePlayer2(player1.phisicalAttack(), player1.magicalAttack(), player1.damageDealt); // damaging Hero 2
+                int dmg = damageRecievePlayer2(player1.phisicalAttack(), player1.magicalAttack()); // damaging Hero 2
                 player1.DamageCounter(dmg); //counting dealt damage
                 player1.other(player2, dmg);
                 heroViewer.mainStats(player2);//Stats in the moment
@@ -182,7 +182,7 @@ class program
 
                 heroViewer.mainStats(player1); //Stats in the moment
                 Console.WriteLine(" PLAYER 2 - " + player2.Name + " attacking:");
-                dmg = damageRecievePlayer1(player2.phisicalAttack(), player2.magicalAttack(), player2.damageDealt); // damaging Hero 1
+                dmg = damageRecievePlayer1(player2.phisicalAttack(), player2.magicalAttack()); // damaging Hero 1
                 player2.DamageCounter(dmg); //counting dealt damage
                 player2.other(player1, dmg);
                 heroViewer.mainStats(player2);
