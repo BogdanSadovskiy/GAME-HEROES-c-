@@ -142,7 +142,7 @@ namespace myGame
                     if (!isHeroCanAddItem(hero)) { Thread.Sleep(1500); continue; }
                     hero.addArtefact (item[menu - 1]);
                     hero.Gold -= item[menu - 1].price;
-                    Console.WriteLine("Have bought " + item[menu - 1]);
+                    Console.WriteLine("\nHave bought " + item[menu - 1]);
                     Thread.Sleep(1500);
                 }
                 else{Thread.Sleep(1500);}  

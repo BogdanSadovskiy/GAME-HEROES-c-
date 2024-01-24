@@ -3,7 +3,7 @@ namespace myGame
 {
     internal class Hero_Viewer
     {
-        public  void mainStats(Hero hero)
+        public static  void mainStats(Hero hero)
         {
             Console.WriteLine("----------------------------------------------");
             Console.WriteLine(hero.Name);
@@ -15,7 +15,7 @@ namespace myGame
             Console.WriteLine(hero.Gold);
             Console.WriteLine("----------------------------------------------");
         }
-        public  void HeroCard(Hero hero)
+        public static void HeroCard(Hero hero)
         {
             Console.WriteLine("==============================================");
             mainStats(hero);
@@ -24,7 +24,7 @@ namespace myGame
             Console.WriteLine("==============================================\n");
         }
 
-        public void HeroesCards(List<Hero> heroes)
+        public static void HeroesCards(List<Hero> heroes)
         {
             int i = 1;
             foreach(Hero h in heroes)

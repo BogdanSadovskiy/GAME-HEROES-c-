@@ -1,7 +1,7 @@
 ﻿
 namespace myGame
 {
-     class Weather_choosing
+    public class Weather_choosing
     {
         public  Weather randWeather()
         {
@@ -37,7 +37,7 @@ namespace myGame
             Console.WriteLine("\t\tHealth Regeneration: " + s.helthRegeneration);
             Console.WriteLine("\t\tMagic resistance: " + s.magicResistance);
             Console.WriteLine("\t\tMiss chance: " + s.missChance);
-            Thread.Sleep(3000);
+ 
 
 
             return s;

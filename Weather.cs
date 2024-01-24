@@ -3,7 +3,7 @@ namespace myGame;
 
 
 
-abstract class Weather
+public abstract class Weather
 {
     public string Name { get; set; }
     public int missChance { get; set; }

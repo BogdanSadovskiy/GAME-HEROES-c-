@@ -8,8 +8,11 @@ namespace myGame
         {
           
         }
-        public string LOGS(Hero player1, Hero player2, string winner, int rounds)
+        public string LOGS(Hero player1, Hero player2, int rounds)
         {
+            String winner;
+            if (player1.isHeroAlive()) winner = "PLAYER 1";
+            else { winner = "PLAYER 2"; }
             string fightLog = "";
             fightLog += "Player 1(" + player1.Name + ") VS Player 2(" + player2.Name;
             fightLog += "\nWinner - " + winner;

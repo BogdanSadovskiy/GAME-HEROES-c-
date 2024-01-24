@@ -9,19 +9,19 @@ namespace myGame
         {
 
             this.Name = "Alchemist";
-            this.HeroDescr = "Starting gold - 1200\nHas increased gold income by 8\n" +
+            this.HeroDescr = "Starting gold - 1200\nHas increased gold income by 48\n" +
                 "When Sunny - gold income + 10\n" + "When Cloudy - gold income + 5\n"
                 + "When Dark night - gold income +19 / physical damage -30";
 
-            this.defaultHealth = 1500;
-            this.defaultHealthRegeneration = 7;
+            this.defaultHealth = 2500;
+            this.defaultHealthRegeneration = 27;
             this.damageType = DamageTYPE.Physical;
             this.defaultPhysicleDamage = 150;
             this.defaultMagicalDamage = 0;
             this.defaultCriticalChance = 0;
             this.defaultDodgeChance = 5;
             this.defaultMagicalResistance = 20;
-            this.defaultPhysicalResistance = 15;
+            this.defaultPhysicalResistance = 25;
             this.defaultMissChance = 0;
 
             this.Health = this.defaultHealth;
@@ -39,7 +39,7 @@ namespace myGame
             this.damageDealt = 0;
             this.damageRecived = 0;
             this.Gold = 1200;
-            this.GoldIncrease = 8;
+            this.GoldIncrease = 48;
         }
 
         public override int heroFeatureMagicalAttack()

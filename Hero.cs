@@ -1,7 +1,7 @@
 ﻿
 namespace myGame
 {
-    abstract class Hero
+    abstract public class Hero
     {
         public Random random = new Random();
         public List<Artefact> artefacts = new List<Artefact>();
@@ -18,6 +18,7 @@ namespace myGame
         public int defaultCriticalChance { get; set; }
         public int defaultDodgeChance { get; set; }
         public int defaultMissChance { get; set; }
+        public int defaultReturnedDamage { get; set; }
 
 
         public int Gold { get; set; }
@@ -42,7 +43,19 @@ namespace myGame
         {
             return artefacts.Count();
         }
-
+        public void returnedDamageManage()
+        {
+            int returnDMG = 0;
+            foreach (Artefact a in artefacts)
+            {
+                if (a.returnedDamage > returnDMG) returnDMG = a.returnedDamage;
+            }
+            if (returnDMG > 0) this.returnedDamage = returnDMG + defaultReturnedDamage;
+            else
+            {
+                this.returnedDamage = defaultReturnedDamage;
+            }
+        }
         public void removeArtefact(int index)
         {
             this.Health -= this.artefacts[index].health;
@@ -56,8 +69,8 @@ namespace myGame
             this.DodgeChance -= this.artefacts[index].DodgeChance;
             this.MissChance -= this.artefacts[index].MissChance;
             this.GoldIncrease -= this.artefacts[index].GoldIncrease;
-            this.returnedDamage -= this.artefacts[index].returnedDamage;
             this.artefacts.RemoveAt(index);
+            returnedDamageManage();
         }
         public void addArtefact(Artefact a)
         {
@@ -77,6 +90,7 @@ namespace myGame
                 this.MissChance += a.MissChance;
                 this.GoldIncrease += a.GoldIncrease;
                 this.returnedDamage += a.returnedDamage;
+                returnedDamageManage();
 
             }
         }
@@ -107,21 +121,22 @@ namespace myGame
         abstract public int heroFeaturePhysicalAttack();
         public int commonPhisicalAttack()
         {
-
+            Console.ForegroundColor = ConsoleColor.Blue;
             if (random.Next(1, 100) <= this.MissChance)
             {
-                Console.Write("Miss");
+                Console.Write("Miss ");
                 return 0;
             }
             double dmg = this.PhysicalDamage;
             if (random.Next(1, 100) <= this.CriticalChance)
             {
-                Console.Write("Critical dmg ");
-                double critical = this.CriticalChance/ 100;
-                dmg *=  (critical + 1);
+                Console.Write("Critical  ");
+                double critical = this.CriticalChance / 100;
+                dmg *= (critical + 1);
 
             }
             this.damageDealt += (int)dmg;
+            Console.ResetColor();
             return (int)dmg;
         }
         public int phisicalAttack()
@@ -135,7 +150,7 @@ namespace myGame
         }
         public int magicalAttack()
         {
-           return heroFeatureMagicalAttack();
+            return heroFeatureMagicalAttack();
         }
         public int Regeneration()
         {
@@ -146,7 +161,9 @@ namespace myGame
         }
         private int getAttakedPhysicalDamage(int physicalDamage_)
         {
+            
             if (physicalDamage_ == 0) return 0;
+            Console.ForegroundColor = ConsoleColor.Blue;
             double dmg = (double)physicalDamage_;
             if (random.Next(1, 100) <= this.DodgeChance)
             {
@@ -157,22 +174,21 @@ namespace myGame
                 double kofOfPhysicleResistanse = (0.052 * this.PhysicalResistance) /
                     (0.9 + 0.048 * this.PhysicalResistance);
                 dmg *= (1 - kofOfPhysicleResistanse);
-                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Physical damage - " + (int)dmg);
-                Console.ResetColor();
             }
+            Console.ResetColor();
             return (int)dmg;
         }
 
         private int getAttackeMagicalDamage(int magicalDamage_)
         {
             if (magicalDamage_ == 0) return 0;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             double dmg = (double)magicalDamage_;
             double kofOfMagResistanse = (0.052 * this.MagicalResistance) /
                        (0.9 + 0.048 * this.MagicalResistance);
             dmg *= (1 - kofOfMagResistanse);
             Console.Write("Magical damage ");
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine((int)dmg);
             Console.ResetColor();
             return (int)dmg;
@@ -180,8 +196,8 @@ namespace myGame
 
         public int getAttacked(int physicalDamage_, int magicalDamage_)
         {
-            int damageRecivedPerThisAttack = getAttakedPhysicalDamage(physicalDamage_) + getAttackeMagicalDamage(physicalDamage_);
-            this.currenthealth-=damageRecivedPerThisAttack;
+            int damageRecivedPerThisAttack = getAttakedPhysicalDamage(physicalDamage_) + getAttackeMagicalDamage(magicalDamage_);
+            this.currenthealth -= damageRecivedPerThisAttack;
             HealthCheking();
             return damageRecivedPerThisAttack;
         }
@@ -197,7 +213,7 @@ namespace myGame
             {
                 this.Gold += 2000;
             }
-            this.Gold += 8 + GoldIncrease;
+            this.Gold += 68 + GoldIncrease;
         }
         public bool isHeroAlive()
         {

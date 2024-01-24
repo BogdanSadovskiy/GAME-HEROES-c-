@@ -11,8 +11,8 @@ namespace myGame
             this.HeroDescr = "Has 20% chance to deal double magic damage\n" +
                 "When it is Dark Night - health regeneration +10";
 
-            this.defaultHealth = 1350;
-            this.defaultHealthRegeneration = 17;
+            this.defaultHealth = 2350;
+            this.defaultHealthRegeneration = 47;
             this.damageType = DamageTYPE.Magical;
             this.defaultPhysicleDamage = 60;
             this.defaultMagicalDamage = 140;
@@ -20,7 +20,8 @@ namespace myGame
             this.defaultDodgeChance = 25;
             this.defaultMagicalResistance = 30;
             this.defaultPhysicalResistance = 5;
-            this.defaultMissChance = 0;
+            this.defaultMissChance = 5;
+            this.defaultReturnedDamage = 0;
 
             this.Health = this.defaultHealth;
             this.currenthealth = Health;
@@ -33,7 +34,7 @@ namespace myGame
             this.DodgeChance = this.defaultDodgeChance;
             this.MissChance = this.defaultMissChance;
             this.numberOFAttack = 0;
-            this.returnedDamage = 0;
+            this.returnedDamage = defaultReturnedDamage;
             this.damageDealt = 0;
             this.damageRecived = 0;
             this.Gold = 1000;

@@ -1,7 +1,7 @@
 ﻿
 namespace myGame
 {
-    enum DamageTYPE
+    public enum DamageTYPE
     {
         Magical,
         Physical

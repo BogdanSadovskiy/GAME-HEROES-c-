@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace myGame
 {
-    abstract class Artefact
+    public abstract class Artefact
     {
         public string Name { get; set; }
         public int price { get; set; }
